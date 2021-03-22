@@ -1,0 +1,197 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+//falto iterar en accion carga el i (pseudo)
+
+struct TPers{
+    char nom[20];
+    char ape[20];
+    int antiguedad;
+    int basico;
+    int sueldofull;
+    int baja;
+};
+
+void Alta(FILE *FP, char nomArchivo[]);
+void Baja(FILE *FP, char nomArch[], char nombreBajar[]);
+void Modificar(FILE *FP, char nomArch[], char apellido[]);
+void CalcularSueldo(FILE *FP, char nomArch[], int convenio);
+void Listar(FILE *FP, char nomArch[]);
+
+int main(void){
+    FILE *FP;
+    int convenio,opt;
+    char apellido[20] = "Juan";
+    char nombreAbuscar[20] = "Pablo";
+
+do{
+    printf("\n\nSELECCIONE UNA OPCION\n\n");
+    printf("\n1- Dar de Alta");
+    printf("\n2- Dar de Baja");
+    printf("\n3- Modificar");
+    printf("\n4- Calcular Sueldo");
+    printf("\n5- Listar");
+    printf("\n6- Salir");
+    scanf("%i",&opt);
+
+    switch (opt)
+    {
+    case 1: Alta(FP,"PERSONAL");
+        break;
+
+    case 2: printf("Ingrese el nombre a buscar: ");
+            scanf("%s",nombreAbuscar);
+            fflush(stdin);
+            Baja(FP,"PERSONAL",nombreAbuscar);
+        break;
+    case 3:  printf("Ingrese el apellido de la persona a modificar: ");
+             scanf("%s",apellido);
+             fflush(stdin);
+             Modificar(FP,"PERSONAL",apellido);
+        break;
+    case 4: CalcularSueldo(FP,"PERSONAL",convenio);
+        break;
+    case 5: Listar(FP,"PERSONAL");
+        break;    
+    default:
+        break;
+    }
+printf("\n\n");
+
+}while(opt != 6);
+    return 0;
+}
+
+void Alta(FILE *FP, char nomArchivo[]){
+    int cant;
+    int i = 0;
+    struct TPers reg;
+    puts("Ingrese la cantidad que desee  dar de alta: ");
+    scanf("%i",&cant);
+    if((FP = fopen(nomArchivo,"ab"))==NULL){
+        perror("Error");
+        exit(1);
+    }else{
+        while(i < cant){
+            fflush(stdin);
+            printf("Ingrese el nombre: ");
+            scanf("%s",reg.nom);
+            fflush(stdin);
+            
+            printf("Ingrese el ape: ");
+            scanf("%s",reg.ape);
+            fflush(stdin);
+
+            printf("Ingrese la antiguedad: ");
+            scanf("%i",&reg.antiguedad);
+
+            printf("Ingrese el basico: ");
+            scanf("%i",&reg.basico);
+            fwrite(&reg,sizeof(reg),1,FP);
+            i  = i+1;        
+        }
+    }
+    fclose(FP);
+}
+
+void Baja(FILE *FP, char nomArch[], char nombreBajar[]){
+    
+    struct TPers reg;
+
+    if((FP = fopen(nomArch,"r+b"))==NULL){
+        perror("Error: " );
+
+    }else{
+        fread(&reg,sizeof(reg),1,FP);
+        while(!feof(FP)){
+            if((strcmp(reg.nom,nombreBajar))==0){
+                printf("sdasd");
+                reg.baja = 1;
+                fseek(FP,(-1*sizeof(reg)),1);
+                fwrite(&reg,sizeof(reg),1,FP);
+                fseek(FP,0L,1);
+            }
+        fread(&reg,sizeof(reg),1,FP);
+        }
+    }
+    fclose(FP);
+}
+
+void Modificar(FILE *FP, char nomArch[], char apellido[]){
+
+    struct TPers reg;
+
+    if ( (FP = fopen(nomArch,"r+b"))==NULL){
+        perror("Error: ");
+    }else{
+        fread(&reg,sizeof(reg),1,FP);
+        while(!feof(FP)){
+            fflush(stdin);
+            if ((strcmp(reg.ape, apellido))== 0){
+                printf("\n Modifica el nombre: ");
+                scanf("%s",reg.nom);
+                fflush(stdin);
+
+                printf("\n Modifica la antiguedad: ");
+                scanf("%i",&reg.antiguedad);
+                fflush(stdin);
+
+                printf("\n Modifica el basico");
+                scanf("%i",&reg.basico);
+                fflush(stdin);
+                fseek(FP,(-1*sizeof(reg)),1);
+                fwrite(&reg,sizeof(reg),1,FP);
+                fseek(FP,0L,1);
+        }
+        fread(&reg,sizeof(reg),1,FP);
+    }
+
+
+}
+fclose(FP);
+}
+
+void CalcularSueldo(FILE *FP, char nomArch[], int convenio){
+    struct TPers reg;
+
+    if ( (FP = fopen(nomArch,"r+b"))==NULL){
+        perror("Error: ");
+    }else{
+        fread(&reg,sizeof(reg),1,FP);
+        while(!feof(FP)){
+                fflush(stdin);
+                reg.sueldofull = reg.basico + (convenio*reg.antiguedad);
+                fseek(FP,(-1*sizeof(reg)),1);
+                fwrite(&reg,sizeof(reg),1,FP);
+                fseek(FP,0L,1);
+                fread(&reg,sizeof(reg),1,FP);
+             }
+        }
+        
+    fclose(FP);
+}
+
+void Listar(FILE *FP, char nomArch[]){
+    struct TPers reg;
+
+    if ( (FP = fopen(nomArch,"r+b"))==NULL){
+        perror("Error: ");
+    }else{
+        fread(&reg,sizeof(reg),1,FP);
+        printf("\n\n");
+        while(!feof(FP)){
+              if(reg.baja != 1){
+                  printf("\n-------------------------------------------------------\n");
+                  printf("\nNombre: %s \nApellido: %s \nSueldo:  %i \nAntiguedad: %i",
+                  reg.nom,
+                  reg.ape,
+                  reg.sueldofull,
+                  reg.antiguedad);
+              }
+                fread(&reg,sizeof(reg),1,FP);
+        }
+      
+    }
+    printf("\n\n");
+    fclose(FP);
+}
