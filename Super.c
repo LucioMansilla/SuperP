@@ -175,7 +175,7 @@ switch (opcion){
         if(ok == 1){
             Actividad7();
         }else if(ok == 2){
-            MostrarTXT("./PSEUDOCODIGOS/Actividad7.txt");
+            MostrarTXT("./PSEUDOCODIGOS/Actividad7.txt"); //
         }else{
             MostrarTXT("./CODIGOS/CODIGO7.txt");
         }
