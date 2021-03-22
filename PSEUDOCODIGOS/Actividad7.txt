@@ -1,0 +1,97 @@
+ TPers=<ape ∈ Cadena, nom ∈ Cadena, antigüedad ∈ Z+, basico ∈ R baja e Logico, sueldo e R>
+ TArchivo = ARCHIVO de TPers
+convenio e Z
+FP e TArchivo
+Accion Alta(dato FP e TArchivo , nomArch e Cadena)
+	Lexico local
+	cant e Z
+	i e Z
+	reg e TPers
+Inicio
+i ← 1
+	Abrir(nomArch,FP,a)
+	Entrada: cant
+	mientras i <= cant hacer
+   Entrada: reg.nom , reg.ape reg.antiguedad
+   Escribir(FP,reg)
+fmientras
+Cerrar(FP)
+
+
+Accion Baja(dato FP e TArchivo, dato nomArch e cadena, dato nombreBajar e cadena)
+	Lexico local
+	reg e TPers
+Inicio
+Abrir(nomArch,FP,e)
+	mientras (not(EOF(FP)) hacer
+   Leer(FP,reg)
+   si nombreBajar = reg.nom entonces
+	reg.baja ← 1 
+      irPos(PosicionActual(nomArch)-1)  
+      Escribir(FP,reg)
+fsi
+fmientras
+Cerrar(FP)
+fACCION
+
+Accion Modificar(dato FP e TArchivo , dato nomArch e cadena, dato apellido e cadena)
+	Lexico local
+	reg e TPers
+	nom e cadena
+	antiguedad e Z
+	basico e R
+Inicio
+Abrir(nomArch,FP,e)
+	mientras (not(EOF(FP)) hacer
+   Leer(FP,reg)
+   si apellido = reg.ape entonces
+	reg.nom ← Entrada: nom
+	reg.antiguedad ← Entrada: antiguedad
+	reg.basico ← Entrada: basico
+      irPos(PosicionActual(nomArch)-1)  
+      Escribir(FP,reg)
+fsi
+fmientras
+Cerrar(FP)
+fACCION
+	
+
+Accion CalcularSueldo(dato FP e TArchivo, dato nomArch e cadena, dato e convenio)
+	Lexico local
+	reg e TPers
+Inicio
+Abrir(nomArch,FP,e)
+	mientras (not(EOF(FP)) hacer
+   Leer(FP,reg)
+       reg.sueldo ← reg.basico + convenio *reg.antiguedad
+      irPos(PosicionActual(nomArch)-1)  
+      Escribir(FP,reg)
+fmientras
+Cerrar(FP)
+fACCION
+
+Accion Listar(dato FP e TArchivo, dato nomArch e cadena)
+	Lexico local
+	reg e TPers
+Inicio
+Abrir(nomArch,FP,l)
+	mientras (not(EOF(FP)) hacer
+   Leer(FP,reg)
+Si (reg.logico = 0) entonces
+  Salida: reg
+            fsi
+fmientras
+Cerrar(FP)
+
+fACCION
+
+Inicio
+   Entrada: convenio,  nomR , ape.
+
+	   Alta(FP,”Personal.dat”)
+	   Baja(FP,”Personal.dat”,nomR)
+   Modificar(FP,”Personal.dat”,ape)
+   CalcularSueldo(FP,”Personal.dat”,convenio)
+   Listar(FP,”Personal.dat”)
+
+Fin
