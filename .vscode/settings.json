@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "DD.C": "cpp"
+        "DD.C": "cpp",
+        "stdbool.h": "c"
     }
 }
