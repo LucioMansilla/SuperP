@@ -1,0 +1,22 @@
+#include <stdio.h>
+ 
+int main(void){
+    
+    float ladoPlaza,areaChampas,areaCemento,areaCuadrado,areaTriangulo;
+
+    printf("Ingrese el lado de la plaza: ");
+    scanf("%f",&ladoPlaza);
+     
+    areaTriangulo = ( (ladoPlaza / 2 ) * (ladoPlaza/2) ) / 2;
+    areaChampas = areaTriangulo * 4;
+
+    areaCuadrado = ladoPlaza * ladoPlaza;
+
+    areaCemento = areaCuadrado - areaChampas;
+
+    printf("El area de champas es %f",areaChampas);
+    printf("El area de cemento es %f",areaCemento);
+
+    return 0;
+
+}

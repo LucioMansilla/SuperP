@@ -1,0 +1,26 @@
+#include <stdio.h>
+#define AlquilerporKm 18.50
+#define AlquilerporDia 1800
+
+int main(void){
+
+    printf("\n AUTHOR: ByL");
+    float kmInicio,kmFinal,importePagar,kmNeto;
+    int cantDias;
+
+    printf("\n\n Porfavor Ingrese  los km al inicio: ");
+    scanf("%f",&kmInicio);
+
+    printf("\n Porfavor Ingrese los km a su llegada: ");
+    scanf("%f",&kmFinal);
+
+    printf("\n Porfavor Ingrese la cantidad de Dias que utilizo el servicio: ");
+    scanf("%i",&cantDias);
+
+    kmNeto = kmFinal-kmInicio;
+    importePagar = kmNeto*AlquilerporKm + cantDias*AlquilerporDia;
+
+    printf("%.2f",importePagar);
+
+    return 0;
+}

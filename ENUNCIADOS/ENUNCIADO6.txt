@@ -1,0 +1,30 @@
+Ej.5) Desarrolle acciones, utilizando punteros y elemento ficticio, que permitan
+manipular una lista de la siguiente manera:
+a) Acción InsertarC, que permite insertar un elemento al comienzo de la secuencia.
+b) Acción InsertarF, que permite insertar un elemento al final de la secuencia
+c) Acción Inicializar, que permita crear la lista vacía y Acción VaciarL que elimine
+todos los elementos de la lista si no está vacía.
+d) Acción InsertarPos, que permita insertar un elemento en una posición dada (si
+esta existe).
+e) Acción EliminarPos, que permita eliminar un elemento de una posición dada, si
+esta existe.
+f) Desarrolla una función que permita BUSCAR un empleado por el nombre. Esta
+función debe devolver un entero que representa la posición en la secuencia de la
+primera aparición de una persona con ese nombre. En caso de no existir, la
+función debe devolver –1.
+g) Acción MuestraReg que permita visualizar los datos de un empleado en pantalla.
+Al invocar esta acción debe previamente utilizar la función BUSCAR y en caso
+que el empleado exista, pasar como parámetro a MuestraReg la posición del
+empleado cuyas datos van a ser visualizados.
+h) Acción Mostrar, que permita visualizar en pantalla los elementos de la
+secuencia.
+i) Desarrollar un algoritmo que mediante un menú de opciones, permite acceder a
+cada una de las acciones antes enumeradas. Agregar una opción para terminar.
+j) Traduce a C las acciones resultantes e implemente en computadora.
+
+El tipo empleado se define como sigue:
+En notación algorítmica
+TEmpleado = <nombre ∈ Cadena, telefono ∈ Cadena, direccion ∈ Cadena, edad
+∈ (18..65)>
+
+

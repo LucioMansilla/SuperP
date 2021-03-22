@@ -1,0 +1,17 @@
+--BIENIVENDO A LA PRIMER ACTIVIDAD--
+    ABAJO ENCONTRARAS EL PSEUDOCODIGO CORRESPONDIENTE, QUE LO DISFRUSTES ESTUDIANTE !
+
+Algoritmo PrimeraAct
+
+Lexico 
+
+  msg e cadena
+
+Inicio
+
+  msg <-- "Hola profe, complete mi primer actividad "
+  Salida : msg
+
+Fin
+
+

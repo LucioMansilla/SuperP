@@ -1,0 +1,23 @@
+Algoritmo: ClubOmnibus
+
+Lexico 
+
+    AlquilerporKm <-- 18.50
+    AlquilerporDia <-- 1800
+    kmInicio e R
+    kmFinal e R
+    cantDias e N
+    importePagar e R
+    kmNeto e R
+    
+Inicio
+
+    Entrada: kmInicio kmFinal cantDias
+
+    kmNeto <--- (kmFinal-kmInicio)
+    importePagar <--- kmNeto * AlquilerporKm + cantDias * AlquilerporDia  
+
+    Salida: importePagar
+    
+Fin
+

@@ -1,0 +1,38 @@
+#include <stdio.h>
+#include <math.h>
+
+int main (void){
+
+    float xCirculo,yCirculo,xPunto,yPunto,radio,distancia;
+
+    printf("Ingrese la coordenada x del punto: ");
+    scanf("%f",&xCirculo);
+
+    printf("Ingrese la coordenada y del punto: ");
+    scanf("%f",&yPunto);
+
+    printf("Ingrese la coordenada x del circulo: ");
+    scanf("%f",&xCirculo);
+
+    printf("Ingrese la coordenada y del circulo: ");
+    scanf("%f",&yCirculo);
+
+    printf("Ingrese el radio: ");
+    scanf("%f",&radio);
+
+    distancia = sqrt(pow((xPunto - xCirculo),2) - pow((yPunto - yCirculo),2));
+
+    if(distancia <= radio){
+
+        printf("El punto esta dento del circulo");
+
+    }else{
+
+        printf("El punto eta afuera del circulo");
+
+    }
+    
+
+        return 0;
+
+}

@@ -1,0 +1,24 @@
+Algoritmo ServicioTaxi
+
+Lexico 
+
+    BajadaBandera e R
+    cantKm e R
+    montoPagar e R
+    ValorKm e R
+
+Inicio
+
+    BajadaBandera <-- 54.24
+    ValorKm <-- 22.50
+    Entrada : cantKm
+
+    montoPagar <-- (cantKm * ValorKm) + BajadaBandera
+
+    Salida : montoPagar
+
+Fin
+
+ 
+
+

@@ -1,0 +1,34 @@
+
+Algoritmo UbicacionPunto
+
+Lexico
+
+    xCirculo e R
+    yCirculo e R
+    xPunto e R
+    yPunto e R
+    radio e R
+    distancia e R
+    msg e cadena
+
+Incio
+
+    Entrada : radio xCirculo yCirculo xPunto yPunto
+
+    distancia <-- radio ( ((xPunto - xCirculo) * (xPunto - xCirculo )) - ((yPunto - yCirculo) * (yPunto - yCirculo)))
+
+    si distancia <= radio entonces
+
+        msg <-- "El punto esta dentro del circulo "
+
+    sino
+
+        msg <-- "El punto esta afuera del circulo "
+        
+    fsi
+
+    Salida : msg
+
+Fin
+
+

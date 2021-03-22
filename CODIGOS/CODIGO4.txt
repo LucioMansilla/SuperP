@@ -1,0 +1,18 @@
+#include <stdio.h>
+#define BajadaBandera  54.24
+#define ValorKm 22.50
+
+int main(void){
+
+    float montoPagar,cantKm;
+
+    printf("Ingrese la cantidad de kilometros registrados: ");
+    scanf("%f",&cantKm);
+
+    montoPagar = (cantKm * ValorKm) + BajadaBandera ;
+
+    printf("El monto a pagar es %f",montoPagar);
+
+    return 0;
+
+}

@@ -1,0 +1,10 @@
+Ejercicio A
+
+El servicio de taxis de una ciudad tiene un valor fijo para la bajada de bandera de $ 54,24.
+Cada vehículo tiene un tarifador que solicita la cantidad de kilómetros recorridos y calcula el monto a pagar.
+
+Desarrollar un algoritmo para el tarifador que solicite la cantidad de kilometros recorridos y luego calcule el 
+monto a pagar (incluyendo la bajada bandera), e informe al usuario dicho monto.  Valores a pagar por kilometro 
+recorrido: $ 22,50.
+
+

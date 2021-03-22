@@ -1,0 +1,25 @@
+
+Algoritmo Plaza
+
+Lexico 
+
+    ladoPlaza e R
+    areaCuadrado e R
+    areaChampas e R
+    areaCemento e R
+    areaTriangulo e R
+
+Inicio
+
+    Entrada : ladoPlaza
+
+    areaTriangulo <-- ((lado / 2) * (lado / 2 )) / 2
+    areaChampas <-- areaTriangulo * 4
+    areaCuadrado <-- lado * lado
+    areaCemento <-- areaCuadrado - areaChampas
+
+    Salida : areaCemento areaChampas
+
+Fin
+
+
