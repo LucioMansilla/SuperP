@@ -88,6 +88,7 @@ printf("\n----------PROGRAMAS NIVEL INTERMEDIO----------");
 printf("\n6) Listas Enlazadas con punteros");
 printf("\n7) Memoria persistente con BD local (archivos binarios) ");
 
+
 printf("\n--------------------");
 printf("\n Su respuesta--> ");
 scanf("%i",&opcion);
