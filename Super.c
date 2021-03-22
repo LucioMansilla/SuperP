@@ -335,7 +335,7 @@ void Actividad6(){
     //MENU
     system("color B0");
     printf("===========================================================================\n");
-	printf("                  Autores: Mansilla Lucio \n");
+    printf("\n");
 	printf("==============================================================================================\n");
 	printf("Bienvenido, ya le hemos creado su lista, (aunque esta vacia :( , disfrute del software!)).\n");
 	printf("==============================================================================================\n");
