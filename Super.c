@@ -7,7 +7,7 @@
 #include <math.h>
 
 //CONSTANTES
-#define BajadaBandera  54.24
+
 #define ValorKm 22.50
 #define AlquilerporKm 18.50
 #define AlquilerporDia 1800
