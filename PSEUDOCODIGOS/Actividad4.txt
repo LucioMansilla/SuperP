@@ -1,3 +1,7 @@
+
+-- BIENVENIDO A LA CUARTA ACTIVIDAD --
+ABAJO ENCONTRARAS EL PSEUDOCODIGO CORRESPONDIENTE, QUE LO DISFRUSTES !!
+
 Algoritmo ServicioTaxi
 
 Lexico 
@@ -19,6 +23,5 @@ Inicio
 
 Fin
 
- 
-
+// Nota: e se utiliza como signo de pertenece
 

@@ -1,0 +1,430 @@
+#include <stdio.h>
+#include <windows.h>
+#include <stdlib.h>
+#include <stdbool.h>
+
+//CONSTANTES
+#define CARGAR_ARCHIVO 1
+#define MOSTRAR_PRODUCTOS 2
+#define VENDER_C 3
+#define INFORME_CLIENTE 4
+#define INFORME_TOTAL 5
+#define INFORME_STOCK 6
+#define EXIT 9 
+
+//ESTRUCTURAS
+struct TProductos{
+    int precio;
+    char Descripcion[80];
+    int stock;
+    int NumeroArticulo;
+    int contador;
+};
+
+struct TClientes{
+    int NumeroCliente;
+    int cantGastada;
+    int cantCompras;
+};
+
+struct TStock{
+    int NumeroCliente;
+    int NumeroArticulo;
+    int unidadesFaltante;
+};
+
+//ACCIONES-FUNCIONES
+bool ExistenciaCliente(char CLIENTES[],int auxCliente);
+void CargarProductos(char PRODUCTOS[]);
+void MostrarProductos(char PRODUCTOS[]);
+int LEE_CONTROL(char PRODUCTOS[], char CLIENTES[]);
+void GenerarFaltaStock(int auxCliente, int nroArticulo);
+void MostrarStockFaltante(char FALTASTOCK[]);
+void InformarCC(char CLIENTES[]);
+void InfoClienteParticular(char CLIENTES[]);
+void InicializarClientes(char CLIENTES[], int auxCliente);
+
+int main(void){
+    FILE *FP;
+    int ficticio;
+    if((FP = fopen("PINTURAS","rb"))== NULL){
+            printf("\n\n DEBE CARGAR SUS PRODUCTOS..\n");
+            CargarProductos("PINTURAS");
+        }
+    
+    
+       do{
+            
+            printf("\n==============================================================================================\n");
+            printf("\n\t.:MENU:.");
+            printf("\nSeleccione la opcion deseada: \n");
+            printf("1- Cargar TIPOS DE PINTURA(Eliminara la Base de datos actual)\n");
+            printf("2- Mostrar lista de productos\n");
+            printf("3- Vender productos (BD se actualiza sola)\n");
+            printf("4-Mostrar Cliente Particular\n");
+            printf("5- Informar y Listar , CLIENTES/CANTIDAD COMPRA\n");
+            printf("6- Informar los productos sin stock");
+            printf("\n9- Salir\n");
+            printf("==============================================================================================\n");
+            printf("SU RESPUESTA: ");
+            scanf("%i",&ficticio);
+            system("cls");
+            
+        switch (ficticio){
+           
+            
+        case CARGAR_ARCHIVO: CargarProductos("PINTURAS");
+            break;
+        case MOSTRAR_PRODUCTOS: MostrarProductos("PINTURAS");
+            break;
+        case VENDER_C: LEE_CONTROL("PINTURAS","CLIENTES");
+            break;
+        case INFORME_CLIENTE: InfoClienteParticular("CLIENTES");
+            break;
+        case INFORME_TOTAL: InformarCC("CLIENTES");
+            break;
+        case INFORME_STOCK: MostrarStockFaltante("FALTASTOCK");
+            break;
+        default:
+            break;
+        }
+    
+        }while(ficticio != 9);
+    
+        
+        return 0; 
+    
+     
+    }
+    
+    void CargarProductos(char PRODUCTOS[]){
+    remove("CLIENTES");
+    remove("FALTASTOCK");
+    FILE *FP;
+        struct TProductos Pinturas;
+        int I; //Para iterar 
+    
+        int cantidad;
+        char nombre[20];
+        printf("\n");
+        printf(".:MENU DE CARGA:\n");
+        printf("IDENTIFIQUESE (Nombre): ");
+        scanf(" %s",nombre);
+        printf("\nBienvenido, %s , Cuantas pinturas desea agregar?: ",nombre);
+        scanf("%i",&cantidad);
+        printf("\n");   
+        
+    if((FP = fopen(PRODUCTOS,"wb"))== NULL){
+            printf("\n\n ERROR APERTURA DE ARCHIVO");
+        }else{
+    
+        
+            for(I = 0 ; I < cantidad ; I++){
+
+                fflush(stdin);
+                printf("\n\n\t  NUMERO DEL ARTICULO %i: ",I);
+                scanf("%i",&Pinturas.NumeroArticulo); 
+                fflush(stdin);
+
+                printf("\n\n\t  DESCRIPCION: ");
+                gets(Pinturas.Descripcion);
+                fflush(stdin);
+
+                printf("\n\n\t  STOCK: ");
+                scanf("%i",&Pinturas.stock);
+                fflush(stdin);
+
+                printf("\n\n\t  PRECIO: "); 
+                scanf("%i",&Pinturas.precio);
+                fflush(stdin);
+
+                fwrite(&Pinturas,sizeof(Pinturas),1,FP);
+        }
+    
+        
+       
+        }
+         fclose(FP);
+    }
+    
+    
+    void MostrarProductos(char PRODUCTOS[]){
+    
+    FILE *FP;
+    struct TProductos Pinturas;
+    
+    if((FP = fopen(PRODUCTOS,"rb")) == NULL){
+    
+            printf("\n\n ERROR APERTURA DE ARCHIVO");
+    }else{
+    
+        printf("==== LISTADO DE PINTURAS ====\n\n");
+        printf("\n\n\t %-20s %15s %15s\n\n","DESCRIPCION","ARTICULO","CANT UNIDADES");
+        fread(&Pinturas,sizeof(Pinturas),1,FP);
+    
+        while(! feof(FP)){
+       
+            printf("\n\n\t %-20s %12i \t\t%i",
+            Pinturas.Descripcion,
+            Pinturas.NumeroArticulo,
+            Pinturas.stock);
+            fread(&Pinturas,sizeof(Pinturas),1,FP);
+           
+        }
+    
+        fclose(FP);
+    }
+    }
+    
+    
+    
+    int LEE_CONTROL(char PRODUCTOS[], char CLIENTES[]){
+        struct TClientes Cliente;
+        struct TProductos Pinturas;
+        FILE *FP;
+        int cant,auxCliente,nroArticulo,cont=0;
+        int ok = 0;
+       MostrarProductos(PRODUCTOS);
+       do{
+        printf("\n==== SECCION VENTAS ====\n");
+        printf("\n\t COMPRA %i",cont+1);
+        printf("\n\n\tIngrese el numero de cliente: ");
+        scanf("%i",&auxCliente);
+        if(auxCliente > 0  && auxCliente < 100){
+            
+            if(ExistenciaCliente(CLIENTES,auxCliente) == false){
+                printf("\nEl cliente no se ha encontrado en la base de Datos, se creará uno nuevo\n");
+                InicializarClientes(CLIENTES,auxCliente);
+            } 
+        
+        printf("Ingrese el articulo a vender: ");
+        scanf("%i",&nroArticulo);
+        printf("Ingrese la cantidad de unidades a vender: ");
+        scanf("%i",&cant);
+    
+        int auxPrecio;
+        if((FP = fopen("PINTURAS","r+b"))== NULL){
+            printf("\n\n ERROR APERTURA DE ARCHIVO");
+        };
+    
+        fread(&Pinturas, sizeof(Pinturas),1,FP);
+        
+        while(!feof(FP) && ok == 0){
+    
+            if(Pinturas.NumeroArticulo == nroArticulo){
+                if(Pinturas.stock >= cant){
+            Pinturas.stock = (Pinturas.stock - cant);
+            auxPrecio = Pinturas.precio;
+            fseek(FP, (-1*sizeof(Pinturas)),1);
+            fwrite(&Pinturas,sizeof(Pinturas),1,FP);
+            fseek(FP, 0L,1);
+            
+            ok = 1;
+                }else{
+                     printf("--> Falta Stock<-- ");
+                     printf("\n\n");
+                     GenerarFaltaStock(auxCliente,nroArticulo);
+                      
+                }
+            }
+            
+            fread(&Pinturas,sizeof(Pinturas),1,FP);
+        }
+        fclose(FP);
+    
+    
+        if(ok == 1){
+           ok = 0;    
+        
+        if((FP = fopen("CLIENTES","r+b"))== NULL){
+            printf("\n\n ERROR APERTURA DE ARCHIVO");
+        };
+        
+        fread(&Cliente, sizeof(Cliente),1,FP);
+        
+        while(!feof(FP) && ok == 0){
+    
+            if(Cliente.NumeroCliente == auxCliente){
+            Cliente.cantCompras = Cliente.cantCompras + 1;
+            Cliente.cantGastada = Cliente.cantGastada + auxPrecio*cant;
+            fseek(FP, (-1*sizeof(Cliente)),1);
+            fwrite(&Cliente,sizeof(Cliente),1,FP);
+            fseek(FP, 0L,1);
+            ok = 1;
+            }
+            
+            fread(&Cliente,sizeof(Cliente),1,FP);
+        }
+        cont = cont +1;
+        fclose(FP);
+        }  
+         };
+     printf("\n\n\n");
+    }while(auxCliente != -1);
+       
+        
+    }
+    
+    void GenerarFaltaStock(int auxCliente, int nroArticulo){
+        struct TStock Stock;
+                    FILE *QP;
+                    if((QP = fopen("FALTASTOCK","ab"))== NULL){
+                        printf("\n\n ERROR APERTURA DE ARCHIVO");
+                    };
+                            Stock.NumeroCliente = auxCliente;
+                            Stock.NumeroArticulo = nroArticulo;
+                            fwrite(&Stock,sizeof(Stock),1,QP);
+                    fclose(QP);
+    }
+    
+    void MostrarStockFaltante(char FALTASTOCK[]){
+    
+    FILE *FP;
+    struct TStock Stock;
+    
+      if((FP = fopen(FALTASTOCK,"rb")) == NULL){
+            printf("\n\n ERROR APERTURA DE ARCHIVO");
+        }else{
+    
+        printf("\n\n\t %-20s %15s\n\n","CLIENTE","ARTICULO");
+        fread(&Stock,sizeof(Stock),1,FP);
+    
+        while(! feof(FP)){
+       
+            printf("\n\n\t %-20i %12i",
+            Stock.NumeroCliente,
+            Stock.NumeroArticulo);
+            fread(&Stock,sizeof(Stock),1,FP);
+        }
+        }
+        fclose(FP);
+    
+    }
+    
+    void InformarCC(char CLIENTES[]){
+        struct TClientes Cliente;
+        FILE *FP;
+        int auxC = 0;
+        int auxNumArt,verificarMaximo=0;
+      if((FP = fopen("CLIENTES","rb"))== NULL){
+            printf("\n\n ERROR APERTURA DE ARCHIVO");
+        }else{
+    
+        printf("\n\n\t %-20s %15s %15s\n\n","CLIENTE","MONTO","CANT COMPRAS");
+        fread(&Cliente,sizeof(Cliente),1,FP);
+    
+        while(! feof(FP)){
+            
+            if(Cliente.cantCompras != 0){
+            printf("\n\n\t %-20i %12i \t\t%i",
+            Cliente.NumeroCliente,
+            Cliente.cantGastada,
+            Cliente.cantCompras);
+            if(Cliente.cantCompras > auxC){
+                 if(Cliente.cantCompras != auxC){
+                  
+                    verificarMaximo = 1;
+                }
+                auxC = Cliente.cantCompras;
+                auxNumArt = Cliente.NumeroCliente;
+               
+            }
+           
+            }
+             fread(&Cliente,sizeof(Cliente),1,FP);
+        }
+        }
+        printf("\n-------------------------------------------------------------------------------------");
+        if(verificarMaximo ==1){
+        printf("\n\n\tCliente con mayor cantidad de compras %i con %i compras",auxNumArt,auxC);
+        }else{
+            printf("\n\n\tPor algun motivo no hemos encontrado un cliente con maximo de compras");
+        }
+            printf("\n-------------------------------------------------------------------------------------");
+    
+        fclose(FP);
+        
+    }
+    
+    bool ExistenciaCliente(char CLIENTES[],int auxCliente){
+        FILE *FP;
+        struct TClientes Cliente;
+        int I;
+        if((FP = fopen(CLIENTES,"rb"))== NULL){
+            printf("\n\n ERROR ARCHIVO VACIO");
+            I = 0;
+            return false; 
+        };
+              
+               fread(&Cliente, sizeof(Cliente),1,FP);
+        
+                while(!feof(FP)){
+                if(Cliente.NumeroCliente == auxCliente){
+                    fclose(FP);
+                    printf("\n\nEntre\n\n");
+                    return true;
+                    
+                }
+                fread(&Cliente, sizeof(Cliente),1,FP);
+        }
+    
+        fclose(FP);
+        return false;
+    }
+    
+    void InicializarClientes(char CLIENTES[], int auxCliente){
+    
+    FILE *FP;
+    struct TClientes Cliente;
+    
+        if((FP = fopen(CLIENTES,"ab"))== NULL){
+            printf("\n\n ERROR APERTURA DE ARCHIVO");
+        };
+        
+                Cliente.NumeroCliente = auxCliente;
+                Cliente.cantGastada = 0;
+                Cliente.cantCompras = 0;
+                fwrite(&Cliente,sizeof(Cliente),1,FP);
+        
+        fclose(FP);
+    
+    }
+    
+    
+    void InfoClienteParticular(char CLIENTES[]){
+        
+        struct TClientes Cliente;
+        FILE *FP;
+        int numeroCliente;
+        printf("Ingrese el numero del cliente: ");
+        scanf(" %i",&numeroCliente);
+        
+    if((FP = fopen("CLIENTES","rb"))== NULL){
+    
+        printf("\n\n ERROR APERTURA DE ARCHIVO");
+    
+    }else{
+    
+        printf("\n\n\t %-20s %15s %15s\n\n","CLIENTE","FACTURA TOTAL","CANT COMPRAS");
+        fread(&Cliente,sizeof(Cliente),1,FP);
+    
+        while(!feof(FP)){
+    
+            if(numeroCliente == Cliente.NumeroCliente){
+    
+            printf("\n\n\t %-20i %12i \t\t%i",
+            Cliente.NumeroCliente,
+            Cliente.cantGastada,
+            Cliente.cantCompras);
+            }
+    
+        fread(&Cliente,sizeof(Cliente),1,FP);
+        
+        }
+    
+    }
+    
+    
+    fclose(FP);
+    
+    }

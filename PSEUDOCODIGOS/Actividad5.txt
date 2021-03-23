@@ -1,3 +1,7 @@
+
+-- BIENVENIDO A LA QUINTA ACTIVIDAD --
+ABAJO ENCONTRARAS EL PSEUDOCODIGO CORRESPONDIENTE, QUE LO DISFRUSTES !!
+
 Algoritmo: ClubOmnibus
 
 Lexico 
@@ -21,3 +25,4 @@ Inicio
     
 Fin
 
+// Nota: e se utiliza como signo de pertenece

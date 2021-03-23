@@ -1,1 +1,1 @@
-Determinar si el punto esta adentro o afuera del circulo.
+Determinar si el punto esta adentro o afuera de un circulo.

@@ -1,4 +1,7 @@
 
+-- BIENVENIDO A LA SEGUNDA ACTIVIDAD --
+ABAJO ENCONTRARAS EL PSEUDOCODIGO CORRESPONDIENTE, QUE LO DISFRUSTES !!
+
 Algoritmo Plaza
 
 Lexico 
@@ -22,4 +25,5 @@ Inicio
 
 Fin
 
+// Nota: e se utiliza como signo de pertenece
 

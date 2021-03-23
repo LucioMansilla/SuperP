@@ -21,16 +21,18 @@ typedef struct snodo{
 typedef TNodo *PunteroaTnodo; //La razón de esta linea es para una mejor comprensión del código, al crear un tipo puntero a TNodo
 void CrearFicticio(PunteroaTnodo *listaC);
 void Inicializar(PunteroaTnodo *listaC);
-bool estavacia(PunteroaTnodo listaC);
+bool estaVacia(PunteroaTnodo listaC);
 void cargaremp(TEmpleado *registro);
-void insertarC(PunteroaTnodo listaC, TEmpleado registro);
-void vaciarL2(PunteroaTnodo *listaC);
+void InsertarC(PunteroaTnodo listaC, TEmpleado registro);
+void VaciarL(PunteroaTnodo *listaC);
 void InsertarPos (PunteroaTnodo *listaC);
 void EliminarPos(PunteroaTnodo listaC);
+int Buscar(PunteroaTnodo lista, char nom[30]);
 void MuestraReg (PunteroaTnodo listaC, int pos);
 void Mostrar(PunteroaTnodo q);
 
 int main(void){ 
+
     //DECLARACION DE VARIABLES
     int opt,pos;
     PunteroaTnodo lista; 
@@ -58,210 +60,281 @@ int main(void){
         printf("2- Insertar un elemento a la cabeza\n");
         printf("3- Corroborar si la lista esta vacia o no\n");
         printf("4- Vaciar la lista\n");
-        printf("5- Mostrar la lista\n");
-        printf("6- Insertar en una posición determinada\n");
-        printf("7- Eliminar un elemento en un posición determinada\n");
-        printf("8- Mostrar una posición determinada\n");
-        printf("9- Salir\n");
+        printf("6- Insertar en una posicion determinada\n");
+        printf("6- Eliminar un elemento en un posicion determinada\n");
+        printf("7- Buscar un empleado en la lista\n");
+        printf("8- Mostrar la lista\n");
+        printf("9- Mostrar una posicion determinada\n");
+        printf("10- Salir\n");
         printf("==============================================================================================\n");
         printf("SU RESPUESTA: ");
         scanf("%i",&opt);
         system("cls");
+        
         switch(opt){
-            case 1: vaciarL2(&lista);
+
+            case 1: VaciarL(&lista);
             break;
             case 2:
                     cargaremp(&registro);
-                    insertarC(lista,registro);
+                    InsertarC(lista,registro);
             break;
 
-            case 3: estavacia(lista);
+            case 3: estaVacia(lista);
             break;
 
-            case 4: vaciarL2(&lista);
+            case 4: VaciarL(&lista);
             break;
 
-            case 5: Mostrar(lista);
+            case 5: InsertarPos(&lista);
             break;  
 
-            case 6: InsertarPos(&lista);
+            case 6: EliminarPos(lista);
             break;
 
-            case 7: EliminarPos(lista);
+            case 7: 
+            printf("Ingrese el nombre del empleado a buscar: ");
+            scanf(" %s",nombre);
+
+            if(Buscar(lista,nombre) != -1){
+                printf("\nEl empleado se encuentra en la posicion %i",Buscar(lista,nombre));
+            }else{
+                printf("\nEl empleado no se encuentra en la lista");
+            }
+            system ("pause");
             break;
 
-            case 8:  printf("Que posición desea visualizar?: ");
-                     scanf("%i",&pos);
-                     MuestraReg(lista,pos);
+            case 8: Mostrar(lista);
+            break;
+
+            case 9:  printf("Que posicion desea visualizar?: ");
+                scanf("%i",&pos);
+                 MuestraReg(lista,pos);
             break;
         }
 
-    }while(opt !=9);
+    }while(opt != 10);
 
-    system("PAUSE");
-
-
-    return 0;
 }
+
 /* funcion para comprobacion del estado de la lista */
-bool estavacia(PunteroaTnodo listaC){
-    if(listaC->Next == NULL){
-         printf("Si");
-        return true;
-       
-    }else{
-        printf("No");
-        return false;
-        
-    }
-}
+bool estaVacia(PunteroaTnodo listaC){
+if(listaC->Next == NULL){
+ printf("Si");
+return true;
 
+}else{
+printf("No");
+return false;
+
+}
+}
 
 /*Accion encargada de inicializar la lista en NULL, (vacia), SI ES LA ACCION QUE HACE UNA LISTA VACIA SI*/
 void Inicializar(PunteroaTnodo *listaC){ //Recibe la direccion de un puntero, que cosas (esto en pseudocodigo no se puede hacer)
-    *listaC = NULL; //accedo a esa direccion y asigno NULL
+*listaC = NULL; //accedo a esa direccion y asigno NULL
 }
-
 
 
 /* Accion encargada de crear un elemento ficticio, esto me sirve para insertar en la posicion que quiera, eliminar.. etc*/
 void CrearFicticio(PunteroaTnodo *listaC){
-	/*lexico local*/
-	PunteroaTnodo aux; //declaracion de otra variable puntera a TNodo
-	/*inicio*/
-	aux = malloc(sizeof(TNodo)); //declaracion del doblete
-	aux->Next = *listaC; // asignamos al campo next de aux la lista
-	*listaC = aux; // y a lista aux donde el campo info no tiene nada
-    aux=NULL;
-    free(aux);
+/*lexico local*/
+PunteroaTnodo aux; //declaracion de otra variable puntera a TNodo
+/*inicio*/
+aux = malloc(sizeof(TNodo)); //declaracion del doblete
+aux->Next = *listaC; // asignamos al campo next de aux la lista
+*listaC = aux; // y a lista aux donde el campo info no tiene nada
+aux=NULL;
+free(aux);
 }
 
 void cargaremp(TEmpleado *registro){
-    printf("Ingrese el nombre del empleado: ");
-    scanf(" %s",registro->nombre);
-    printf("Ingrese el telefono del empleado(No se mostrara): ");
-    scanf("%i",&registro->telefono);
+
+fflush(stdin);
+printf("Ingrese el nombre del empleado: ");
+gets(registro->nombre);
+
+fflush(stdin);
+printf("\nIngrese el apellido del empleado: ");
+gets(registro->apellido);
+
+printf("\nIngrese la edad del empleado: ");
+scanf("%i",&registro->edad);
+
+printf("\nIngrese el telefono del empleado: ");
+scanf("%i",&registro->telefono);
+
+fflush(stdin);
+printf("\nIngrese la direccion del empleado: ");
+gets(registro->direccion);
+
+
 }
 
-void insertarC(PunteroaTnodo listaC, TEmpleado registro){
-	PunteroaTnodo aux;
-	aux = malloc(sizeof(TNodo));
-	aux->info = registro;
-	aux->Next = listaC->Next;
-	listaC->Next = aux; 
-    aux = NULL;
-    free(aux);
+void InsertarC(PunteroaTnodo listaC, TEmpleado registro){
+
+PunteroaTnodo aux;
+
+aux = malloc(sizeof(TNodo));
+aux->info = registro;
+aux->Next = listaC->Next;
+listaC->Next = aux; 
+aux = NULL;
+free(aux);
 }
 
-void vaciarL2(PunteroaTnodo *listaC){
-    if(*listaC !=NULL){
+void VaciarL(PunteroaTnodo *listaC){
 
-     while(*listaC != NULL){
-        PunteroaTnodo aux;
-        aux = *listaC;
-        *listaC =  aux->Next;
-        free(aux);
-    }
-    
-    CrearFicticio(listaC);
-    
-    }
+if(*listaC !=NULL){
+
+while(*listaC != NULL){
+PunteroaTnodo aux;
+aux = *listaC;
+*listaC =  aux->Next;
+free(aux);
+}
+
+CrearFicticio(listaC);
+
+}
 }
 
 
 void InsertarPos (PunteroaTnodo *listaC){
-	/*lexico local*/
-	PunteroaTnodo aux, nuevo;
-	int i,n;
-	/*inicio*/
-	do{
-		printf("\n\tIngrese la posicion donde ingresar el nuevo elemento   ");
-		scanf("%i",&n);	
-	}while(n<0);
-	aux = *listaC;
-	i=1;
-	while(i<n && aux->Next != NULL){
-		i++;
-		aux= aux->Next;
-	}
-	if(i==n){
-		nuevo = malloc(sizeof(TNodo));
-		TEmpleado empTemporal;
-        cargaremp(&empTemporal);
-        nuevo->info = empTemporal;
-		nuevo->Next = aux->Next;	
-		aux->Next = nuevo;	
-		printf("\n\tEmpleado insertado con exito!");	
-	}else{
-		printf("\n\tLa posicion no existe");
-	}
-    aux=NULL;
-    nuevo=NULL;
-    free(aux);
-    free(nuevo);
+
+PunteroaTnodo aux, nuevo;
+int i,n;
+
+do{
+printf("\n\tIngrese la posicion donde ingresar el nuevo elemento   ");
+scanf("%i",&n);	
+}while(n<0);
+
+aux = *listaC;
+i=1;
+
+while(i<n && aux->Next != NULL){
+i++;
+aux= aux->Next;
+}
+
+if(i==n){
+nuevo = malloc(sizeof(TNodo));
+TEmpleado empTemporal;
+cargaremp(&empTemporal);
+nuevo->info = empTemporal;
+nuevo->Next = aux->Next;	
+aux->Next = nuevo;	
+printf("\n\tEmpleado insertado con exito!");	
+}else{
+printf("\n\tLa posicion no existe");
+}
+
+aux=NULL;
+nuevo=NULL;
+free(aux);
+free(nuevo);
 }
 
 
 
 void EliminarPos(PunteroaTnodo listaC){
-    /*lexico local*/
-	PunteroaTnodo aux, aux2;
-	int i,n;
-	/*inicio*/
-	do{
-		printf("\n\tIngrese la posicion que desea eliminar  ");
-		scanf("%i",&n);	
-	}while(n<0);
-	aux = listaC;
-	i=1;
-	while(i<n && aux->Next != NULL){
-		i++;
-		aux= aux->Next;
-	}
-	if(i==n){
-		aux2 = aux->Next;	
-		aux->Next = aux2->Next;	
-        
-        free(aux2);
-		printf("\n\tEmpleado insertado con exito!");	
-	}else{
-		printf("\n\tLa posicion no existe");
-	}
-    aux=NULL;
-    free(aux);
+
+PunteroaTnodo aux, aux2;
+int i,n;
+
+do{
+printf("\n\tIngrese la posicion que desea eliminar  ");
+scanf("%i",&n);	
+}while(n<0);
+aux = listaC;
+i=1;
+while(i<n && aux->Next != NULL){
+i++;
+aux= aux->Next;
+}
+if(i==n){
+aux2 = aux->Next;	
+aux->Next = aux2->Next;	
+
+free(aux2);
+printf("\n\tEmpleado insertado con exito!");	
+}else{
+printf("\n\tLa posicion no existe");
 }
 
+aux=NULL;
+free(aux);
+}
+
+int Buscar(PunteroaTnodo lista, char nom[30]){
+
+PunteroaTnodo aux;
+int pos;
+int i;
+
+pos = -1;
+i = 1;
+
+aux = lista->Next;
+
+fflush(stdin);
+
+while (aux != NULL){
+
+if(strcmp(aux->info.nombre,nom) == 0){
+    pos = i;
+}
+i ++;
+aux = aux->Next;
+}
+
+return pos;
+
+}
 
 void MuestraReg (PunteroaTnodo listaC, int pos){
-	/*lexico local*/
-	PunteroaTnodo aux,aux2;
-	int i = 1;
-	/*inicio*/
-    aux = listaC->Next;
-    while(i<pos && aux->Next != NULL){
-		i++;
-		aux = aux->Next;
-	}
-    if(i == pos){
-	 printf(" [%s] -> ",aux->info.nombre);
-    }else{
-        printf("La posición no existe");
-    }
-    aux=NULL;
-    free(aux);
+/*lexico local*/
+PunteroaTnodo aux,aux2;
+int i = 1;
+/*inicio*/
+aux = listaC->Next;
+while(i<pos && aux->Next != NULL){
+i++;
+aux = aux->Next;
+}
+
+if(i == pos){
+printf(" [%s] -> ",aux->info.nombre);
+printf(" [%s] -> ",aux->info.apellido);
+printf(" [%i] -> ",aux->info.edad);
+printf(" [%i] -> ",aux->info.telefono);
+printf(" [%s] -> ",aux->info.direccion);
+
+}else{
+printf("La posición no existe");
+}
+aux=NULL;
+free(aux);
 }
 
 
 void Mostrar(PunteroaTnodo q){ 
-    PunteroaTnodo aux = q;
-    int i = 1;
-    while(aux->Next != NULL){
-        
-          MuestraReg(q,i);
-           i++;
-           aux= aux->Next;
-      
-    }
-    aux=NULL;
-    free(aux);
+
+PunteroaTnodo aux = q;
+int i = 1;
+
+if (q != NULL){
+
+while(aux->Next != NULL){
+    
+    MuestraReg(q,i);
+    i++;
+    aux = aux->Next;
+
 }
+}
+
+aux = NULL;
+free(aux);
+} 

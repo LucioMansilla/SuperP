@@ -1,16 +1,24 @@
-Dado un archivo (llamado personal.dat) que almacena la información de los empleados
-de una fábrica mediante registro de tipo TPers=<ape ∈ Cadena, nom ∈ Cadena, antigüedad ∈
-Z+, basico ∈ R>, dónde ape es el apellido, nom el nombre, antigüedad es la cantidad de años de
-antigüedad en el trabajo y básico el sueldo básico, desarrolle un algoritmo que conste de las
+
+7) Dado un archivo (llamado personal.dat) que almacena la informacion de los empleados
+de una fabrica mediante un registro de tipo TPers = < ape e Cadena, nom e Cadena, antiguedad e
+Z+, basico e R>, donde ape es el apellido, nom el nombre, antiguedad es la cantidad de años de
+antiguedad en el trabajo y basico el sueldo basico, desarrolle un programa que realice las
 siguientes opciones:
-a) Alta, permita cargar los datos de un empleado (excepto el sueldo que debe ser calculado en
-un paso posterior),
-b) Baja, que permita borrar un registro del archivo (baja lógica).
-c) Modificar, que permita buscar un registro por el apellido y luego permita modificar
+
+* Alta: permite cargar los datos de un empleado (excepto el sueldo que debe ser calculado en
+un paso posterior).
+
+* Baja: posibilita borrar un registro del archivo (baja logica).
+
+* Modificar: busca un registro por el apellido y luego puede modificar
 cualquiera de los otros campos del registro (excepto el apellido).
-d) Listar, liste todos los datos del personal,
-e) Calcular, calcula el sueldo que corresponde a cada empleado almacenado en el archivo,
-calculado con el básico más $300 por cada año de antigüedad, el monto de $300 surge de un
-convenio entre el gremio de los empleados y la patronal, por lo tanto debe ser un dato que
-debería poder ser dado por la entrada del algoritmo.
-f) No olvide agregar una opción para Salir.
+
+* Listar: lista todos los datos del personal.
+
+* Calcular: calcula el sueldo que corresponde a cada empleado almacenado en el archivo,
+calculado con el basico mas el monto del convenio por cada año de antiguedad. El convenio entre el
+gremio de los empleados y la patronal, es un dato que deberia poder ser dado por la entrada del programa.
+
+* Opcion para Salir.
+
+// Nota: e se utiliza como signo de pertenece

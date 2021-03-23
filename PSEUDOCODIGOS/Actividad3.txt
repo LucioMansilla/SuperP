@@ -1,4 +1,7 @@
 
+-- BIENVENIDO A LA TERCERA ACTIVIDAD --
+ABAJO ENCONTRARAS EL PSEUDOCODIGO CORRESPONDIENTE, QUE LO DISFRUSTES !!
+
 Algoritmo UbicacionPunto
 
 Lexico
@@ -11,7 +14,7 @@ Lexico
     distancia e R
     msg e cadena
 
-Incio
+Inicio
 
     Entrada : radio xCirculo yCirculo xPunto yPunto
 
@@ -31,4 +34,4 @@ Incio
 
 Fin
 
-
+// Nota: e se utiliza como signo de pertenece
