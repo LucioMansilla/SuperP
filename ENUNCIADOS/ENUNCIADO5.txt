@@ -1,9 +1,10 @@
+-- BIENVENIDO AL QUINTO ENUNCIADO --
 
-Un club contrató un ómnibus para viajar hasta otra localidad a jugar un torneo que dura varios días.
-El alquiler del ómnibus es por kilómetro, a un costo de 18,50 pesos cada kilómetro, más la cantidad de 
-días que se usó, a un costo de 1800 pesos por día.
+Un club contrato un omnibus para viajar hasta otra localidad a jugar un torneo que dura varios dias.
+El alquiler del omnibus es por kilometro, a un costo de 18,50 pesos cada kilometro, mas la cantidad de 
+dias que se uso, a un costo de 1800 pesos por dia.
 
-Desarrollar un algoritmo en pseudolenguaje que solucione dicho problema. Para ello debe solicitar al 
-usuario los kilómetros que marcaba el cuentakilómetros del ómnibus al momento de la partida, la cantidad 
-de kilómetros que marcó el cuentakilómetros del ómnibus al regreso, y la cantidad de días que fue utilizado. 
+Desarrollar un programa que solucione dicho problema. Para ello debe solicitar al 
+usuario los kilometros que marcaba el cuentakilometros del omnibus al momento de la partida, la cantidad 
+de kilometros que marco el cuentakilometros del omnibus al regreso, y la cantidad de dias que fue utilizado. 
 Luego debe calcular el importe a pagar por el club.

@@ -86,7 +86,6 @@ void Actividad6();
 void Actividad7();
 void Actividad8();
 
-
 //FUNCIONES /ACCIONES ACTIVIDAD 06
 void CrearFicticio(PunteroaTnodo *listaC);
 void Inicializar(PunteroaTnodo *listaC);
@@ -172,7 +171,7 @@ switch (opcion){
         MostrarTXT("./ENUNCIADOS/ENUNCIADO3.txt");
         ok = Pregunta();
         if(ok == 1){
-            Actividad2();
+            Actividad3();
         }else if(ok == 2){
             MostrarTXT("./PSEUDOCODIGOS/Actividad3.txt");
         }else{
@@ -184,7 +183,7 @@ switch (opcion){
         MostrarTXT("./ENUNCIADOS/ENUNCIADO4.txt");
         ok = Pregunta();
         if(ok == 1){
-            Actividad3();
+            Actividad4();
         }else if(ok == 2){
             MostrarTXT("./PSEUDOCODIGOS/Actividad4.txt");
         }else{
@@ -245,15 +244,6 @@ switch (opcion){
     break;
 
 
-    /* hacer
-    if(Pregunta2() == 2){
-        opcion = 5;
-    }
-
-   */
-
-
-
     system("PAUSE");
     return 0;
 }
@@ -263,10 +253,11 @@ switch (opcion){
 int Pregunta(){
 
     int Opcion;
-    
+    printf("\n");
     printf("\n1-Ejecutar\t2-Ver Pseudocodigo\t3-Ver Codigo");
-    printf("\nSu respuesta: ");
+    printf("\n\nSu respuesta: ");
     scanf("%i",&Opcion);
+
     return Opcion;
 }
 
@@ -283,7 +274,7 @@ int Pregunta2(){
 
 
 void PrimerActividad(){
-    printf("\n\n Hola profe!, Complete mi primer actividad");
+    printf("\nHola profe!, Complete mi primer actividad");
 }
 
 
@@ -291,7 +282,7 @@ void Actividad2(){
 
     float ladoPlaza,areaChampas,areaCemento,areaCuadrado,areaTriangulo;
 
-    printf("Ingrese el lado de la plaza: ");
+    printf("\nIngrese el lado de la plaza: ");
     scanf("%f",&ladoPlaza);
 
     areaTriangulo = ( (ladoPlaza / 2 ) * (ladoPlaza/2) ) / 2;
@@ -301,8 +292,8 @@ void Actividad2(){
 
     areaCemento = areaCuadrado - areaChampas;
 
-    printf("El area de champas es %f",areaChampas);
-    printf("El area de cemento es %f",areaCemento);
+    printf("\nEl area de champas es %f",areaChampas);
+    printf("\nEl area de cemento es %f",areaCemento);
 
 }
 
@@ -337,30 +328,30 @@ void Actividad3(){
 
     float xCirculo,yCirculo,xPunto,yPunto,radio,distancia;
 
-    printf("Ingrese la coordenada x del punto: ");
+    printf("\nIngrese la coordenada x del punto: ");
     scanf("%f",&xCirculo);
 
-    printf("Ingrese la coordenada y del punto: ");
+    printf("\nIngrese la coordenada y del punto: ");
     scanf("%f",&yPunto);
 
-    printf("Ingrese la coordenada x del circulo: ");
+    printf("\nIngrese la coordenada x del circulo: ");
     scanf("%f",&xCirculo);
 
-    printf("Ingrese la coordenada y del circulo: ");
+    printf("\nIngrese la coordenada y del circulo: ");
     scanf("%f",&yCirculo);
 
-    printf("Ingrese el radio: ");
+    printf("\nIngrese el radio: ");
     scanf("%f",&radio);
 
     distancia = sqrt(pow((xPunto - xCirculo),2) - pow((yPunto - yCirculo),2));
 
     if(distancia <= radio){
 
-        printf("El punto esta dento del circulo");
+        printf("\nEl punto esta dentro del circulo");
 
     }else{
 
-        printf("El punto esta afuera del circulo");
+        printf("\nEl punto esta afuera del circulo");
 
     }
 
@@ -371,41 +362,42 @@ void Actividad4(){
 
 float montoPagar,cantKm;
 
-printf("Ingrese la cantidad de kilometros registrados: ");
+printf("\nIngrese la cantidad de kilometros registrados: ");
 scanf("%f",&cantKm);
 
 montoPagar = (cantKm * ValorKm) + BajadaBandera ;
 
-printf("El monto a pagar es %f",montoPagar);
+printf("\nEl monto a pagar es %f",montoPagar);
 
 }
 
 
 void Actividad5(){
-    printf("\n AUTHOR: ByL");
+  
     float kmInicio,kmFinal,importePagar,kmNeto;
     int cantDias;
 
-    printf("\n\n Porfavor Ingrese  los km al inicio: ");
+    printf("\nPorfavor ingrese los km al inicio: ");
     scanf("%f",&kmInicio);
 
-    printf("\n Porfavor Ingrese los km a su llegada: ");
+    printf("\nPorfavor ingrese los km a su llegada: ");
     scanf("%f",&kmFinal);
 
-    printf("\n Porfavor Ingrese la cantidad de Dias que utilizo el servicio: ");
+    printf("\nPorfavor ingrese la cantidad de dias que utilizo el servicio: ");
     scanf("%i",&cantDias);
 
     kmNeto = kmFinal-kmInicio;
     importePagar = kmNeto*AlquilerporKm + cantDias*AlquilerporDia;
 
-    printf("%.2f",importePagar);
+    printf("\nEl importe a pagar por el club es %.2f",importePagar);
 
 
 }
 
 
 void Actividad6(){
-     //DECLARACION DE VARIABLES
+
+    //DECLARACION DE VARIABLES/TIPOS LOCALES
     int opt,pos;
     PunteroaTnodo lista;
     char nombre[30];
@@ -493,7 +485,7 @@ void Actividad6(){
 
 }
 
-/* funcion para comprobacion del estado de la lista */
+/* Funcion para analizar el estado de la lista */
 bool estaVacia(PunteroaTnodo listaC){
     if(listaC->Next == NULL){
          printf("Si");
@@ -506,20 +498,20 @@ bool estaVacia(PunteroaTnodo listaC){
     }
 }
 
-/*Accion encargada de inicializar la lista en NULL, (vacia), SI ES LA ACCION QUE HACE UNA LISTA VACIA SI*/
-void Inicializar(PunteroaTnodo *listaC){ //Recibe la direccion de un puntero, que cosas (esto en pseudocodigo no se puede hacer)
-    *listaC = NULL; //accedo a esa direccion y asigno NULL
+/*Accion encargada de inicializar la lista en NULL, (vacia)*/
+void Inicializar(PunteroaTnodo *listaC){ 
+    *listaC = NULL; 
+
 }
 
-
-/* Accion encargada de crear un elemento ficticio, esto me sirve para insertar en la posicion que quiera, eliminar.. etc*/
+/* Accion encargada de crear un elemento ficticio */
 void CrearFicticio(PunteroaTnodo *listaC){
-	/*lexico local*/
-	PunteroaTnodo aux; //declaracion de otra variable puntera a TNodo
-	/*inicio*/
-	aux = malloc(sizeof(TNodo)); //declaracion del doblete
-	aux->Next = *listaC; // asignamos al campo next de aux la lista
-	*listaC = aux; // y a lista aux donde el campo info no tiene nada
+	
+	PunteroaTnodo aux; 
+
+	aux = malloc(sizeof(TNodo)); 
+	aux->Next = *listaC; 
+	*listaC = aux; 
     aux=NULL;
     free(aux);
 }
@@ -670,10 +662,10 @@ int Buscar(PunteroaTnodo lista, char nom[30]){
 }
 
 void MuestraReg (PunteroaTnodo listaC, int pos){
-	/*lexico local*/
+	
 	PunteroaTnodo aux,aux2;
 	int i = 1;
-	/*inicio*/
+
     aux = listaC->Next;
     while(i<pos && aux->Next != NULL){
 		i++;
@@ -1256,10 +1248,10 @@ if((FP = fopen("PINTURAS","rb"))== NULL){
         printf("\n==============================================================================================\n");
         printf("\n\t.:MENU:.");
         printf("\nSeleccione la opcion deseada: \n");
-        printf("1- Cargar TIPOS DE PINTURA(Eliminara la Base de datos actual)\n");
+        printf("1- Cargar TIPOS DE PINTURA (Eliminara la Base de datos actual)\n");
         printf("2- Mostrar lista de productos\n");
         printf("3- Vender productos (BD se actualiza sola)\n");
-        printf("4-Mostrar Cliente Particular\n");
+        printf("4- Mostrar Cliente Particular\n");
         printf("5- Informar y Listar , CLIENTES/CANTIDAD COMPRA\n");
         printf("6- Informar los productos sin stock");
         printf("\n9- Salir\n");

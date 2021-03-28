@@ -1,3 +1,5 @@
+-- BIENVENIDO AL QUINTO PROGRAMA --
+
 #include <stdio.h>
 #define AlquilerporKm 18.50
 #define AlquilerporDia 1800

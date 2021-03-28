@@ -1,3 +1,5 @@
+-- BIENVENIDO AL PRIMER PROGRAMA --
+
 #include <stdio.h>
 
 int main(void){

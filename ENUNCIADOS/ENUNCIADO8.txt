@@ -1,0 +1,11 @@
+-- BIENVENIDO AL OCTAVO ENUNCIADO --
+
+La pintureria "Alba" (PINTURAS) necesita software que le permita realizar las ventas de su productos (pinturas). Para ello elabore un programa que utilice un archivo 
+para guardar los productos de forma permanente y los registros de las ventas efectuadas, ademas debe contar con un menu para desarrollar las siguientes opciones :
+
+* Cargar Productos 
+* Vender productos (Actualizacion del stock)
+* Mostrar la cantidad de compras de un cliente particular 
+* Mostrar todos clientes y sus respectivas compras 
+* Informar los productos sin stock
+* Salir

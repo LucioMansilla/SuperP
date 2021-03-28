@@ -1,7 +1,7 @@
-En un pueblo del interior el intendente decide pavimentar una plaza dejando un centro con forma cuadrada como
-espacio verde. La forma de la plaza es como ilustra la figura. Los triángulos APS, PEQ, QCR, RDS seran pavimentados.
+-- BIENVENIDO AL SEGUNDO ENUNCIADO --
 
-El cuadrado PQRS, se cubrira con champas de cesped. Se conoce la longitud de cualquier de los lados de la plaza 
-(los lados AB, BC, CD y DA, tienen la misma longitud),
-¿puedes ayudar al intendente a calcular el area de la superficie que hay que pavimentar 
-y el area de la superficie que hay que cubrir con champas?.
+En un pueblo del interior el intendente decide pavimentar una plaza dejando un centro con forma cuadrada como
+espacio verde. Se conoce la longitud de cualquier de los lados de la plaza. 
+
+Puedes ayudar al intendente a calcular el area de la superficie que hay que pavimentar 
+y el area de la superficie que hay que cubrir con champas ? .

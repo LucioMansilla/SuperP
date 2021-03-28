@@ -1,5 +1,6 @@
+-- BIENVENIDO AL SEPTIMO ENUNCIADO --
 
-7) Dado un archivo (llamado personal.dat) que almacena la informacion de los empleados
+Dado un archivo (llamado personal.dat) que almacena la informacion de los empleados
 de una fabrica mediante un registro de tipo TPers = < ape e Cadena, nom e Cadena, antiguedad e
 Z+, basico e R>, donde ape es el apellido, nom el nombre, antiguedad es la cantidad de años de
 antiguedad en el trabajo y basico el sueldo basico, desarrolle un programa que realice las

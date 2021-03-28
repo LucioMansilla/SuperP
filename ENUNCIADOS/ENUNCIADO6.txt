@@ -1,4 +1,6 @@
-6) Crear una LSE con ficticio que almacene en cada componente un empleado, con los siguientes datos : nombre, 
+-- BIENVENIDO AL SEXTO ENUNCIADO --
+
+Crear una LSE con ficticio que almacene en cada componente un empleado, con los siguientes datos : nombre, 
 apellido, edad, telefono y direccion .
 
 Luego desarrolle acciones, utilizando punteros y elemento ficticio, que permitan
